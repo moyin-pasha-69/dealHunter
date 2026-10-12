@@ -1,9 +1,8 @@
 import express from "express";
+import healthRoutes from "./routes/health-check.routes.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello Bro!");
-});
+app.use("/api/v1", healthRoutes);
 
 export default app;
