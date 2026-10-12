@@ -1,0 +1,34 @@
+{
+  "name": "dealhunter",
+  "version": "1.0.0",
+  "description": "Price tracking and deal alert application",
+  "keywords": [
+    "nodejs",
+    "backend",
+    "mongodb",
+    "mongoose",
+    "express",
+    "jb"
+  ],
+  "homepage": "https://github.com/moyin-pasha-69/dealHunter#readme",
+  "bugs": {
+    "url": "https://github.com/moyin-pasha-69/dealHunter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moyin-pasha-69/dealHunter.git"
+  },
+  "author": "Moyin Pasha",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.1",
+    "nodemon": "^3.1.14"
+  }
+}
