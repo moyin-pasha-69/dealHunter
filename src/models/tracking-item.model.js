@@ -2,30 +2,30 @@ import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema(
   {
-    uerId: {
+    //which user's item is
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      trim: true,
+      ref: "User",
       required: true,
     },
+    //product id
     productId: {
       type: mongoose.Schema.Types.ObjectId,
-      trim: true,
+      ref: "Product",
       required: true,
     },
     targetPrice: {
-      type: number,
+      type: Number,
+      required: true,
       validate: {
-        required: true,
-        validator: () => {
-          return { VALUE } > 0;
-        },
-        message: "must be greater than Zero",
+        validator: (v) => v > 0,
+        message: "Target price must be greater than zero",
       },
     },
     currency: {
-      type: string,
+      type: String,
       required: true,
-      default: INR,
+      default: "INR",
     },
     status: {
       type: String,
@@ -34,21 +34,28 @@ const itemSchema = new mongoose.Schema(
         values: ["active", "paused", "unavailable", "error"],
         message: "{VALUE} not valid",
       },
+      default: "active",
     },
     lastCheckedAt: {
-      type: date,
+      type: Date,
     },
     lastSuccessfulCheckAt: {
-      type: date,
+      type: Date,
     },
     lastKnownPrice: {
-      type: date,
+      type: Number,
     },
     notificationSettings: {
-      type: String,
+      type: {
+        email: {
+          type: Boolean,
+          default: true,
+        },
+      },
+      default: () => ({}),
     },
   },
-  { timestamp: true },
+  { timestamps: true },
 );
 
 const itemModel = mongoose.model("TrackingItem", itemSchema);
