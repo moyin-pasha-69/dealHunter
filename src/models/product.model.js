@@ -2,36 +2,31 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
+    //company name
     provider: {
       type: String,
       trim: true,
       required: true,
     },
-    providerProductId: {
-      type: String,
-    },
+    //name as i prefer
     title: {
       type: String,
       trim: true,
       required: true,
     },
+    //product url or link
     productUrl: {
       type: String,
+      trim: true,
       required: true,
     },
-    imageUrl: {
-      type: String,
-    },
     category: {
-      type: String,
-    },
-    variant: {
       type: String,
     },
   },
   { timestamps: true },
 );
 
-const productModel = mongoose.model("Product", productSchema);
+const productModel = mongoose.model("Products", productSchema);
 
 export default productModel;
