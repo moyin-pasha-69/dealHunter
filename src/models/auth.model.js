@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
       immutable: true,
-      select: false,
     },
     firstName: {
       type: String,
@@ -31,6 +30,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "email is required"],
+      trim: true,
       unique: true,
       validate: {
         validator: validator.isEmail,
@@ -40,6 +40,8 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "password is required"],
+      trim: true,
+      select: false,
     },
   },
   { timestamps: true },

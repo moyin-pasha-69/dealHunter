@@ -1,4 +1,5 @@
 import userModel from "../models/auth.model.js";
+
 import bcrypt from "bcrypt";
 import * as helpUtils from "../utils/helpFull.utils.js";
 import jsonwebtoken from "jsonwebtoken";
@@ -36,5 +37,31 @@ const userRegister = asyncErrorHandler(async (req, res, next) => {
     },
   });
 });
+const loginUser = asyncErrorHandler(async (req, res, next) => {
+  const user = req.user;
+  const token = await jsonwebtoken.sign(
+    {
+      id: user._id,
+      username: user.username,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d" },
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  });
+  return res.status(200).json({
+    status: "success",
+    message: "user logged successfully",
+    data: {
+      username: user.username,
+      fullname: `${user.firstName} ${user.lastName || ""}`,
+      email: user.email,
+    },
+  });
+});
 
-export { userRegister };
+export { userRegister, loginUser };

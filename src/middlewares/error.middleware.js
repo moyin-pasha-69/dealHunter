@@ -1,7 +1,7 @@
 function errorHandler(err, req, res, next) {
   let statusCode = err.statusCode || 500;
   let message = err.message || "Internal server error";
-  console.log(err.code, err);
+  console.log(err);
   if (err.name === "ValidationError") {
     statusCode = 400;
     message = Object.values(err.errors)
@@ -15,7 +15,6 @@ function errorHandler(err, req, res, next) {
 
     message = `${field} already Exist` || "Duplicated Value";
   }
-  console.log(statusCode, message);
   err.status = err.status || "error";
   res.status(statusCode).json({
     status: statusCode,
