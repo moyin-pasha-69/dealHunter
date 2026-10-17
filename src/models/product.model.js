@@ -6,19 +6,19 @@ const productSchema = new mongoose.Schema(
     provider: {
       type: String,
       trim: true,
-      required: true,
+      required: [true, "provider is required"],
     },
     //name as i prefer
     title: {
       type: String,
       trim: true,
-      required: true,
+      required: [true, "title is required"],
     },
     //product url or link
     productUrl: {
       type: String,
       trim: true,
-      required: true,
+      required: [true, "product URL is required"],
     },
     category: {
       type: String,
