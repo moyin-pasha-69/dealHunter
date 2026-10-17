@@ -8,16 +8,12 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       required: true,
-      immutable: [true, "you can't change  this value"],
+      immutable: true,
       select: false,
     },
     firstName: {
       type: String,
       trim: true,
-      validate: {
-        validator: validator.isAlpha({ VALUE }),
-        message: "Name must be contain alphabets",
-      },
       required: [true, "first name is required"],
       minLength: [3, "First name must be more than 3 characters"],
       maxLength: [15, "First name not exceed more than 15"],
@@ -26,7 +22,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
       validate: {
-        validator: validator.isAlpha({ VALUE }),
+        validator: validator.isAlpha,
         message: "Name must be contain alphabets",
       },
       minLength: [3, "Last name must be more than 3 characters"],
@@ -37,7 +33,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "email is required"],
       unique: true,
       validate: {
-        validator: validator.isEmail({ VALUE }),
+        validator: validator.isEmail,
         message: "email id is invalid",
       },
     },
